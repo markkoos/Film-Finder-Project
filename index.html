@@ -14,9 +14,24 @@
               <h1 class="text-primary">Film-Finders: Finding Films</h1>
                 <div class="card">
                     <div class="search">
-                        <input type="text" class="input" placeholder="Search Films">
-                        <button class="button is-success is-large">Search</button>
-                        <button class="button is-large">Button</button>
+                        <input type="text" class="input mb-5 mt-5" id="film-input" placeholder="Search Films">
+                        <button class="button is-success is-large" id="search-btn">Search</button>
                     </div>
+                </div>
+                <div class="row" id="search-results-header">
+                    <div class="col-12">
+                        <h2>Search Results:</h2>
+                    </div>
+                </div>
+                <div class="row result bg-primary text-black m-2 rounded"></div>
+                <div class="row result bg-primary text-black m-2 rounded"></div>
+                <div class="row result bg-primary text-black m-2 rounded"></div>
+                <div class="row result bg-primary text-black m-2 rounded"></div>
+                <div class="row result bg-primary text-black m-2 rounded"></div>
+            </div>
+        </div>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+                    <script src="./script.js"></script>
     </body>
 </html>
