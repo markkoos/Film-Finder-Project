@@ -1,12 +1,13 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
+var videoEmbed = document.querySelector(`.title is-child`)
 
-searchEl.addEventListener("click", function(event) {
+// searchEl.addEventListener("click", function(event) {
 
-})
-function renderSearch() {
+// })
+// function renderSearch() {
 
-}
+// }
 
 
 
@@ -28,6 +29,14 @@ function renderSearch() {
     .then(function (data) {
         console.log(data);
         var trailerData = data.list[0].id
+        function addScript() {
+            var script = document.createElement( 'script' );
+            script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
+            script.setAttribute(`data-video`, `${trailerData}`);
+            document.body.appendChild(script);
+          }
+        
+          addScript();
         console.log(trailerData);
         
     })
@@ -37,3 +46,4 @@ function renderSearch() {
  }
 
  getDailyAPI();
+
