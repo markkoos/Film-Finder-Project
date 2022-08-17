@@ -18,12 +18,22 @@ function renderSearch() {
         // includes a placeholder for the movie title we get from the OMDb API
     var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=whiplash+trailer+ov&limit=1`
 
+    var trailerData = ""
+
     fetch(dailyRequestURL)
     .then(function (response) {
         console.log(response);
-        return response.json;
+        return response.json();
     })
+    .then(function (data) {
+        console.log(data);
+        var trailerData = data.list[0].id
+        console.log(trailerData);
+        
+    })
+
+    
 
  }
 
- 
+ getDailyAPI();
