@@ -13,6 +13,53 @@ var videoEmbed = document.querySelector(`.title is-child`)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Dailymotion API 
  function getDailyAPI() {
 // fetch request for Dailymotion
