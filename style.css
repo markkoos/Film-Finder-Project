@@ -1,0 +1,19 @@
+
+.card{
+    background-color: hsl(217, 71%, 53%);
+}
+
+.box {
+    background-color: hsl(204, 86%, 53%);
+}
+
+.box:hover {
+    transition: transform 150ms;
+    transform: scale(1.05);
+}
+
+.box:active {
+    background-color: lightgreen;
+    transition: transform 150ms;
+    transform: scale(1)
+}
