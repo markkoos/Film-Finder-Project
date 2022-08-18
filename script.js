@@ -44,10 +44,10 @@ function renderSearch() {
         })
 }
 
-// searchEl.addEventListener("click", function(event) {
-//     const searchFilm = filmEl.value;
-//     renderSearch(searchFilm);
-// })
+searchEl.addEventListener("click", function(event) {
+    const searchFilm = filmEl.value;
+    renderSearch(searchFilm);
+})
 
 
 
