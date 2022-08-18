@@ -36,8 +36,6 @@ function getDailyAPI() {
             // includes a placeholder for the movie title we get from the OMDb API
         var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=whiplash+trailer+ov&limit=1`
     
-        var trailerData = ""
-    
         fetch(dailyRequestURL)
         .then(function (response) {
             console.log(response);
@@ -45,9 +43,9 @@ function getDailyAPI() {
         })
         .then(function (data) {
             console.log(data);
-            var trailerData = data.list[0].id
+            var trailerData = data.list[0].idz
             function addScript() {
-                var script = document.createElement( 'script' );
+                var script = document.createElement('script');
                 script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
                 script.setAttribute(`data-video`, `${trailerData}`);
                 document.body.appendChild(script);
