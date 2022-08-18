@@ -65,7 +65,6 @@ function renderSearch() {
         console.log(response);
         return response.json();
     })
-
          .then(function (data) {
         console.log(data);
         // targets the id retrieved from dailymotion api
@@ -77,18 +76,12 @@ function renderSearch() {
             script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
             script.setAttribute(`data-video`, `${trailerData}`);
             vidPlayer.appendChild(script);
-            
-            
           }
         
           addScript();
         console.log(trailerData);
         
-    })
-    
-
-
- }
+    }) }
 
  getDailyAPI();
     
