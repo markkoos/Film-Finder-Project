@@ -1,18 +1,23 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
 var vidPlayer = document.querySelector(`.vid-player`);
-
+var selectedMovie
+var selectedYear
+var selectedImage
+var movieActors
+var moviePlot
 function renderSearch() {
-    var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&apikey=8e725623"
-    
+    var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&plot" + "&apikey=8e725623"
+
     $.ajax({
         url: queryURL,
         method: "GET"
-   
+
     })
-        .then (function(response) {
+        .then(function (response) {
             console.log(queryURL);
             console.log(response);
+            console.log(response.Search[0].Plot);
             var movieTitle1 = response.Search[0].Title
             var movieTitle2 = response.Search[1].Title
             var movieTitle3 = response.Search[2].Title
@@ -50,62 +55,118 @@ function renderSearch() {
             movieThumb4.src = movieImageLink4
             var movieThumb5 = document.querySelector(".movie-image5")
             movieThumb5.src = movieImageLink5
+
+            var filmSelectEl1 = document.getElementById("box-1")
+            filmSelectEl1.addEventListener("click", function (event) {
+                localStorage.setItem(`clickedMovie` , movieTitle1)
+                localStorage.setItem(`clickedYear`, movieYear1)
+                grabData();
+                window.location.assign("./page2.html")
+            })
+
+            var filmSelectEl2 = document.getElementById("box-2")
+            filmSelectEl2.addEventListener("click", function (event) {
+                localStorage.setItem(`clickedMovie` , movieTitle2)
+                localStorage.setItem(`clickedYear`, movieYear2)
+                window.location.assign("./page2.html")
+            })
+
+            var filmSelectEl3 = document.getElementById("box-3")
+            filmSelectEl3.addEventListener("click", function (event) {
+                localStorage.setItem(`clickedMovie` , movieTitle3)
+                localStorage.setItem(`clickedYear`, movieYear3)
+                window.location.assign("./page2.html")
+            })
+
+            var filmSelectEl4 = document.getElementById("box-4")
+            filmSelectEl4.addEventListener("click", function (event) {
+                localStorage.setItem(`clickedMovie` , movieTitle4)
+                localStorage.setItem(`clickedYear`, movieYear4)
+                window.location.assign("./page2.html")
+            })
+
+            var filmSelectEl5 = document.getElementById("box-5")
+            filmSelectEl5.addEventListener("click", function (event) {
+                localStorage.setItem(`clickedMovie` , movieTitle5)
+                localStorage.setItem(`clickedYear`, movieYear5)
+                window.location.assign("./page2.html")
+            })
+
+
         })
 }
 
 
-
-
+selectedMovie = localStorage.getItem(`clickedMovie`);
+selectedYear = localStorage.getItem(`clickedYear`);
+console.log(selectedMovie);
 
 
 
 
 // Dailymotion API 
- function getDailyAPI() {
-        // fetch request for Dailymotion
-        // includes a placeholder for the movie title we get from the OMDb API
-    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=whiplash+trailer+ov&limit=1`
+function getDailyAPI() {
+    // fetch request for Dailymotion
+    // includes a placeholder for the movie title we get from the OMDb API
+    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=${selectedMovie}+${selectedYear}+trailer&limit=1`
 
     fetch(dailyRequestURL)
-    .then(function (response) {
-        console.log(response);
-        return response.json();
-    })
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
 
-         .then(function (data) {
-        console.log(data);
-        // targets the id retrieved from dailymotion api
-        var trailerData = data.list[0].id
-        console.log(trailerData);
-        function addScript() {
-        //    creates the video player and adds it into page2.html
-            var script = document.createElement('script');
-            script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
-            script.setAttribute(`data-video`, `${trailerData}`);
-            vidPlayer.appendChild(script);
-            
-            
-          }
-        
-          addScript();
-        console.log(trailerData);
-        
-    })
-    
+        .then(function (data) {
+            console.log(data);
+            // targets the id retrieved from dailymotion api
+            var trailerData = data.list[0].id
+            console.log(trailerData);
+            function addScript() {
+                //    creates the video player and adds it into page2.html
+                var script = document.createElement('script');
+                script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
+                script.setAttribute(`data-video`, `${trailerData}`);
+                vidPlayer.appendChild(script);
 
 
- }
+            }
 
- getDailyAPI();
+            addScript();
+            console.log(trailerData);
+
+        })
 
 
 
+}
 
- searchEl.addEventListener("click", function(event) {
+
+getDailyAPI();
+
+// Actors, Plot
+// http://www.omdbapi.com/?t=star+wars&plot=full&apikey=8e725623
+function grabData() {
+    // var movieURL = "https://www.omdbapi.com/?t=" + selectedMovie + "&apikey=8e725623"
+    var movieURL = `http://www.omdbapi.com/?t=${selectedMovie}&plot=full&apikey=8e725623`
+
+    fetch(movieURL)
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        })
+}
+
+
+grabData();
+console.log(grabData());
+
+searchEl.addEventListener("click", function (event) {
     const searchFilm = filmEl.value;
     renderSearch(searchFilm);
 })
-
 
 
 
