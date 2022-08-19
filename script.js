@@ -1,5 +1,6 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
+var vidPlayer = document.querySelector(`.vid-player`);
 
 function renderSearch() {
     var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&apikey=8e725623"
@@ -43,10 +44,10 @@ function renderSearch() {
         })
 }
 
-searchEl.addEventListener("click", function(event) {
-    const searchFilm = filmEl.value;
-    renderSearch(searchFilm);
-})
+// searchEl.addEventListener("click", function(event) {
+//     const searchFilm = filmEl.value;
+//     renderSearch(searchFilm);
+// })
 
 
 
@@ -55,14 +56,87 @@ searchEl.addEventListener("click", function(event) {
 
 // Dailymotion API 
  function getDailyAPI() {
-// fetch request for Dailymotion
+        // fetch request for Dailymotion
         // includes a placeholder for the movie title we get from the OMDb API
     var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=whiplash+trailer+ov&limit=1`
 
     fetch(dailyRequestURL)
     .then(function (response) {
         console.log(response);
-        return response.json;
+        return response.json();
     })
 
+         .then(function (data) {
+        console.log(data);
+        // targets the id retrieved from dailymotion api
+        var trailerData = data.list[0].id
+        console.log(trailerData);
+        function addScript() {
+        //    creates the video player and adds it into page2.html
+            var script = document.createElement('script');
+            script.setAttribute(`src`, `https://geo.dailymotion.com/player.js`);
+            script.setAttribute(`data-video`, `${trailerData}`);
+            vidPlayer.appendChild(script);
+            
+            
+          }
+        
+          addScript();
+        console.log(trailerData);
+        
+    })
+    
+
+
  }
+
+ getDailyAPI();
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
