@@ -33,21 +33,12 @@ function renderSearch() {
             document.querySelector(".movie-year4").textContent = "Release Year: " + movieYear4;
             document.querySelector(".movie-year5").textContent = "Release Year: " + movieYear5;
 
-            var movieImageLink1 = response.Search[0].Poster;
-            var movieImageLink2 = response.Search[1].Poster;
-            var movieImageLink3 = response.Search[2].Poster;
-            var movieImageLink4 = response.Search[3].Poster;
-            var movieImageLink5 = response.Search[4].Poster;
-            var movieThumb1 = document.querySelector(".movie-image1")
-            movieThumb1.src = movieImageLink1
-            var movieThumb2 = document.querySelector(".movie-image2")
-            movieThumb2.src = movieImageLink2
-            var movieThumb3 = document.querySelector(".movie-image3")
-            movieThumb3.src = movieImageLink3
-            var movieThumb4 = document.querySelector(".movie-image4")
-            movieThumb4.src = movieImageLink4
-            var movieThumb5 = document.querySelector(".movie-image5")
-            movieThumb5.src = movieImageLink5
+            var movieImage1 = response.Search[0].Poster
+            var movieImage2 = response.Search[1].Poster
+            var movieImage3 = response.Search[2].Poster
+            var movieImage4 = response.Search[3].Poster
+            var movieImage5 = response.Search[4].Poster
+            // Can't figure out this part 
         })
 }
 
