@@ -1,11 +1,17 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
 var vidPlayer = document.querySelector(`.vid-player`);
+var posterSRC = document.getElementById(`poster-div`);
+var actorsDIV = document.getElementById(`actors-id`);
+var titleMovie = document.getElementById(`title-movie`);
+var backBtn = document.getElementById(`back-button`);
 var selectedMovie
 var selectedYear
 var selectedImage
 var movieActors
+var grabActors
 var moviePlot
+var grabPlot
 function renderSearch() {
     var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&plot" + "&apikey=8e725623"
 
@@ -60,7 +66,8 @@ function renderSearch() {
             filmSelectEl1.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle1)
                 localStorage.setItem(`clickedYear`, movieYear1)
-                grabData();
+                localStorage.setItem(`clickedIMG`, movieImageLink1)
+                
                 window.location.assign("./page2.html")
             })
 
@@ -68,6 +75,7 @@ function renderSearch() {
             filmSelectEl2.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle2)
                 localStorage.setItem(`clickedYear`, movieYear2)
+                localStorage.setItem(`clickedIMG`, movieImageLink2)
                 window.location.assign("./page2.html")
             })
 
@@ -75,6 +83,7 @@ function renderSearch() {
             filmSelectEl3.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle3)
                 localStorage.setItem(`clickedYear`, movieYear3)
+                localStorage.setItem(`clickedIMG`, movieImageLink3)
                 window.location.assign("./page2.html")
             })
 
@@ -82,6 +91,7 @@ function renderSearch() {
             filmSelectEl4.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle4)
                 localStorage.setItem(`clickedYear`, movieYear4)
+                localStorage.setItem(`clickedIMG`, movieImageLink4)
                 window.location.assign("./page2.html")
             })
 
@@ -89,6 +99,7 @@ function renderSearch() {
             filmSelectEl5.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle5)
                 localStorage.setItem(`clickedYear`, movieYear5)
+                localStorage.setItem(`clickedIMG`, movieImageLink5)
                 window.location.assign("./page2.html")
             })
 
@@ -99,8 +110,9 @@ function renderSearch() {
 
 selectedMovie = localStorage.getItem(`clickedMovie`);
 selectedYear = localStorage.getItem(`clickedYear`);
-console.log(selectedMovie);
+selectedImage = localStorage.getItem(`clickedIMG`);
 
+console.log(selectedMovie);
 
 
 
@@ -156,17 +168,68 @@ function grabData() {
         })
         .then(function (data) {
             console.log(data);
-        })
+
+            //sets all the locally stored values onto the page2.html 
+            var movieActors = data.Actors
+            console.log(movieActors);
+            localStorage.setItem(`actors`, movieActors);
+            grabActors = localStorage.getItem(`actors`)
+            function getActors() {
+                var actorsLi = document.createElement('li');
+                actorsLi.setAttribute(`class`, `container is-fluid`);
+                actorsLi.textContent = `Actors: ${grabActors}`
+                actorsDIV.appendChild(actorsLi);
+            }
+            
+            function getIMG() {
+                var img = document.createElement('img');
+                img.setAttribute(`class`, `px-auto`);
+                img.setAttribute(`src`, `${selectedImage}`);
+                posterSRC.appendChild(img);
+            };
+            
+            function getTitle() {
+                titleMovie.textContent = `${selectedMovie} (${selectedYear})`
+            };
+        
+            var moviePlot = data.Plot
+            localStorage.setItem(`plot`, moviePlot);
+            grabPlot = localStorage.getItem(`plot`);
+            function getPlot() {
+            var plotLi = document.createElement('li');
+            plotLi.setAttribute(`class`, `container is-fluid`);
+            plotLi.textContent = `Plot: ${grabPlot}`
+            actorsDIV.appendChild(plotLi);
+            }
+
+            getActors();
+            getPlot();
+            getIMG();
+            getTitle();
+            
+            function createBack() {
+                backBtn.addEventListener(`click`, function() {
+                    window.location.assign("./index.html")
+                })
+            }
+            
+            createBack();
+
+        }) 
+      
+        
 }
 
 
 grabData();
-console.log(grabData());
+
 
 searchEl.addEventListener("click", function (event) {
     const searchFilm = filmEl.value;
     renderSearch(searchFilm);
 })
+
+
 
 
 

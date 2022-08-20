@@ -12,29 +12,25 @@
 <body class="section px-3">
     <h1 class="container is-max-desk has-text-centered is-size-1"><strong>Film Finders</strong></h1>
     <H2 class="container is-max-desk has-text-centered is-size-1">Finding Films and Researching made Easy</H2>
-    <button class="button is-success is-small" href="index.html">Back To Previous Search Results</button>   
+    <button class="button is-success is-small" id="back-button" href="/index.html">Back To Search Page</button>   
    
    
 
 <div class="tile is-ancestor">
     <div class="tile is-4 is-vertical is-parent">
-      <div class="tile is-child box">
+      <div class="tile is-child box" id="poster-div">
          <!-- movie title name-->
-         <h2 class="has-text-centered has-text-weight-bold is-size-2">Movie Title</h2>
+         <h2 class="has-text-centered has-text-weight-bold is-size-2" id="title-movie"></h2>
          <!-- div for movie poster movie information and video player-->
-        <img class="px-auto" src="https://m.media-amazon.com/images/M/MV5BYTg2Zjk0ZTctM2ZmMi00MDRmLWJjOGYtNWM0YjBmZTBjMjRkXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_SX300.jpg"/>
       </div>
       <div class="tile is-child box">
        <!-- this is for the movie information -->
-        <p class="container is-fluid">{"Title":"Light Year","Year":"2014","Rated":"N/A","Released":"N/A","Runtime":"10 min","Genre":"Short","Director":"Paul Clipson","Writer":"N/A","Actors":"N/A","Plot":"A commission for the San Francisco Exploratorium, this film-collage studies the water systems and architecture of the San Francisco waterfront, in abstract and formal contexts. The musical score by Tashi Wada is performed by celli...","Language":"N/A","Country":"United States","Awards":"N/A","Poster":"https://m.media-amazon.com/images/M/MV5BZjAyZjM4NjktODE2Ni00ZDljLWJmNDctMWFmMjRhMTkwM2JlXkEyXkFqcGdeQXVyNzM1NzU5NTA@._V1_SX300.jpg","Ratings":[],"Metascore":"N/A","imdbRating":"N/A","imdbVotes":"12","imdbID":"tt6857144","Type":"movie","DVD":"N/A",
-            "BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}.</p>
+       <ul class="container is-fluid" id="actors-id"></ul>
       </div>
     </div>
     <div class="tile is-parent">
       <div class="tile is-child box vid-player">
          <!-- place holder for video player  -->
-         <!-- commented out script for testing videoplayer -->
-        <!-- <script src="https://geo.dailymotion.com/player.js" data-video="x88ubq7"></script> -->
       </div>
     </div>
   </div>
