@@ -106,6 +106,39 @@ function renderSearch() {
     renderSearch(searchFilm);
 })
 
+var filmSelectEl1 = document.getElementById("box-1")
+filmSelectEl1.addEventListener("click", function(event) {
+    window.location.assign("./page2.html")
+})
+
+var filmSelectEl2 = document.getElementById("box-2")
+filmSelectEl1.addEventListener("click", function(event) {
+    window.location.assign("./page2.html")
+})
+
+var filmSelectEl3 = document.getElementById("box-3")
+filmSelectEl1.addEventListener("click", function(event) {
+    window.location.assign("./page2.html")
+})
+
+var filmSelectEl4 = document.getElementById("box-4")
+filmSelectEl1.addEventListener("click", function(event) {
+    window.location.assign("./page2.html")
+})
+
+var filmSelectEl5 = document.getElementById("box-5")
+filmSelectEl1.addEventListener("click", function(event) {
+    window.location.assign("./page2.html")
+})
+
+
+
+
+
+
+
+
+
 
 
 
