@@ -1,5 +1,6 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
+var searchResultsEl = document.querySelector(".search-results");
 var vidPlayer = document.querySelector(`.vid-player`);
 var posterSRC = document.getElementById(`poster-div`);
 var actorsDIV = document.getElementById(`actors-id`);
@@ -12,7 +13,10 @@ var movieActors
 var grabActors
 var moviePlot
 var grabPlot
+
 function renderSearch() {
+    searchResultsEl.classList.remove("is-hidden");
+
     var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&plot" + "&apikey=8e725623"
 
     $.ajax({
@@ -51,16 +55,16 @@ function renderSearch() {
             var movieImageLink3 = response.Search[2].Poster;
             var movieImageLink4 = response.Search[3].Poster;
             var movieImageLink5 = response.Search[4].Poster;
-            var movieThumb1 = document.querySelector(".movie-image1")
-            movieThumb1.src = movieImageLink1
-            var movieThumb2 = document.querySelector(".movie-image2")
-            movieThumb2.src = movieImageLink2
-            var movieThumb3 = document.querySelector(".movie-image3")
-            movieThumb3.src = movieImageLink3
-            var movieThumb4 = document.querySelector(".movie-image4")
-            movieThumb4.src = movieImageLink4
-            var movieThumb5 = document.querySelector(".movie-image5")
-            movieThumb5.src = movieImageLink5
+            var movieThumb1 = document.querySelector(".movie-image1");
+            movieThumb1.src = movieImageLink1;
+            var movieThumb2 = document.querySelector(".movie-image2");
+            movieThumb2.src = movieImageLink2;
+            var movieThumb3 = document.querySelector(".movie-image3");
+            movieThumb3.src = movieImageLink3;
+            var movieThumb4 = document.querySelector(".movie-image4");
+            movieThumb4.src = movieImageLink4;
+            var movieThumb5 = document.querySelector(".movie-image5");
+            movieThumb5.src = movieImageLink5;
 
             var filmSelectEl1 = document.getElementById("box-1")
             filmSelectEl1.addEventListener("click", function (event) {
@@ -120,7 +124,7 @@ console.log(selectedMovie);
 function getDailyAPI() {
     // fetch request for Dailymotion
     // includes a placeholder for the movie title we get from the OMDb API
-    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=${selectedMovie}+${selectedYear}+trailer&limit=1`
+    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=${selectedMovie}+${selectedYear}+trailer+english&limit=1`
 
     fetch(dailyRequestURL)
         .then(function (response) {
@@ -176,7 +180,7 @@ function grabData() {
             grabActors = localStorage.getItem(`actors`)
             function getActors() {
                 var actorsLi = document.createElement('li');
-                actorsLi.setAttribute(`class`, `container is-fluid`);
+                actorsLi.setAttribute(`class`, `container`);
                 actorsLi.textContent = `Actors: ${grabActors}`
                 actorsDIV.appendChild(actorsLi);
             }
@@ -197,7 +201,7 @@ function grabData() {
             grabPlot = localStorage.getItem(`plot`);
             function getPlot() {
             var plotLi = document.createElement('li');
-            plotLi.setAttribute(`class`, `container is-fluid`);
+            plotLi.setAttribute(`class`, `container`);
             plotLi.textContent = `Plot: ${grabPlot}`
             actorsDIV.appendChild(plotLi);
             }
