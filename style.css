@@ -6,12 +6,12 @@
     background-color: hsl(204, 86%, 53%);
 }
 
-.box:hover {
+.box.result:hover {
     transition: transform 150ms;
     transform: scale(1.05);
 }
 
-.box:active {
+.box.result:active {
     background-color: lightgreen;
     transition: transform 150ms;
     transform: scale(1)
@@ -20,4 +20,10 @@
 #movie-title {
     font-weight: bold;
     font-size: large;
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
