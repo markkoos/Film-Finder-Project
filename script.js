@@ -1,12 +1,22 @@
 var searchEl = document.getElementById("search-btn");
 var filmEl = document.getElementById("film-input");
+var searchResultsEl = document.querySelector(".search-results");
 var vidPlayer = document.querySelector(`.vid-player`);
+var posterSRC = document.getElementById(`poster-div`);
+var actorsDIV = document.getElementById(`actors-id`);
+var titleMovie = document.getElementById(`title-movie`);
+var backBtn = document.getElementById(`back-button`);
 var selectedMovie
 var selectedYear
 var selectedImage
 var movieActors
+var grabActors
 var moviePlot
+var grabPlot
+
 function renderSearch() {
+    searchResultsEl.classList.remove("is-hidden");
+
     var queryURL = "https://www.omdbapi.com/?s=" + filmEl.value + "&plot" + "&apikey=8e725623"
 
     $.ajax({
@@ -45,22 +55,23 @@ function renderSearch() {
             var movieImageLink3 = response.Search[2].Poster;
             var movieImageLink4 = response.Search[3].Poster;
             var movieImageLink5 = response.Search[4].Poster;
-            var movieThumb1 = document.querySelector(".movie-image1")
-            movieThumb1.src = movieImageLink1
-            var movieThumb2 = document.querySelector(".movie-image2")
-            movieThumb2.src = movieImageLink2
-            var movieThumb3 = document.querySelector(".movie-image3")
-            movieThumb3.src = movieImageLink3
-            var movieThumb4 = document.querySelector(".movie-image4")
-            movieThumb4.src = movieImageLink4
-            var movieThumb5 = document.querySelector(".movie-image5")
-            movieThumb5.src = movieImageLink5
+            var movieThumb1 = document.querySelector(".movie-image1");
+            movieThumb1.src = movieImageLink1;
+            var movieThumb2 = document.querySelector(".movie-image2");
+            movieThumb2.src = movieImageLink2;
+            var movieThumb3 = document.querySelector(".movie-image3");
+            movieThumb3.src = movieImageLink3;
+            var movieThumb4 = document.querySelector(".movie-image4");
+            movieThumb4.src = movieImageLink4;
+            var movieThumb5 = document.querySelector(".movie-image5");
+            movieThumb5.src = movieImageLink5;
 
             var filmSelectEl1 = document.getElementById("box-1")
             filmSelectEl1.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle1)
                 localStorage.setItem(`clickedYear`, movieYear1)
-                grabData();
+                localStorage.setItem(`clickedIMG`, movieImageLink1)
+                
                 window.location.assign("./page2.html")
             })
 
@@ -68,6 +79,7 @@ function renderSearch() {
             filmSelectEl2.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle2)
                 localStorage.setItem(`clickedYear`, movieYear2)
+                localStorage.setItem(`clickedIMG`, movieImageLink2)
                 window.location.assign("./page2.html")
             })
 
@@ -75,6 +87,7 @@ function renderSearch() {
             filmSelectEl3.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle3)
                 localStorage.setItem(`clickedYear`, movieYear3)
+                localStorage.setItem(`clickedIMG`, movieImageLink3)
                 window.location.assign("./page2.html")
             })
 
@@ -82,6 +95,7 @@ function renderSearch() {
             filmSelectEl4.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle4)
                 localStorage.setItem(`clickedYear`, movieYear4)
+                localStorage.setItem(`clickedIMG`, movieImageLink4)
                 window.location.assign("./page2.html")
             })
 
@@ -89,6 +103,7 @@ function renderSearch() {
             filmSelectEl5.addEventListener("click", function (event) {
                 localStorage.setItem(`clickedMovie` , movieTitle5)
                 localStorage.setItem(`clickedYear`, movieYear5)
+                localStorage.setItem(`clickedIMG`, movieImageLink5)
                 window.location.assign("./page2.html")
             })
 
@@ -99,8 +114,9 @@ function renderSearch() {
 
 selectedMovie = localStorage.getItem(`clickedMovie`);
 selectedYear = localStorage.getItem(`clickedYear`);
-console.log(selectedMovie);
+selectedImage = localStorage.getItem(`clickedIMG`);
 
+console.log(selectedMovie);
 
 
 
@@ -108,7 +124,7 @@ console.log(selectedMovie);
 function getDailyAPI() {
     // fetch request for Dailymotion
     // includes a placeholder for the movie title we get from the OMDb API
-    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=${selectedMovie}+${selectedYear}+trailer&limit=1`
+    var dailyRequestURL = `https://api.dailymotion.com/videos?fields=id,title&search=${selectedMovie}+${selectedYear}+trailer+english&limit=1`
 
     fetch(dailyRequestURL)
         .then(function (response) {
@@ -156,12 +172,61 @@ function grabData() {
         })
         .then(function (data) {
             console.log(data);
-        })
+
+            //sets all the locally stored values onto the page2.html 
+            var movieActors = data.Actors
+            console.log(movieActors);
+            localStorage.setItem(`actors`, movieActors);
+            grabActors = localStorage.getItem(`actors`)
+            function getActors() {
+                var actorsLi = document.createElement('li');
+                actorsLi.setAttribute(`class`, `container`);
+                actorsLi.textContent = `Actors: ${grabActors}`
+                actorsDIV.appendChild(actorsLi);
+            }
+            
+            function getIMG() {
+                var img = document.createElement('img');
+                img.setAttribute(`class`, `px-auto`);
+                img.setAttribute(`src`, `${selectedImage}`);
+                posterSRC.appendChild(img);
+            };
+            
+            function getTitle() {
+                titleMovie.textContent = `${selectedMovie} (${selectedYear})`
+            };
+        
+            var moviePlot = data.Plot
+            localStorage.setItem(`plot`, moviePlot);
+            grabPlot = localStorage.getItem(`plot`);
+            function getPlot() {
+            var plotLi = document.createElement('li');
+            plotLi.setAttribute(`class`, `container`);
+            plotLi.textContent = `Plot: ${grabPlot}`
+            actorsDIV.appendChild(plotLi);
+            }
+
+            getActors();
+            getPlot();
+            getIMG();
+            getTitle();
+            
+            function createBack() {
+                backBtn.addEventListener(`click`, function() {
+                    window.location.assign("./index.html")
+                })
+            }
+            
+            createBack();
+
+        }) 
+      
+        
 }
 
 
 grabData();
-console.log(grabData());
+
 
 searchEl.addEventListener("click", function (event) {
     const searchFilm = filmEl.value;
@@ -170,47 +235,23 @@ searchEl.addEventListener("click", function (event) {
 
 
 
+function applyTheme(theme){
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(`theme-${theme}`);
+}
 
+document.addEventListener("DOMContentLoaded", () => {
 
+    var savedTheme = localStorage.getItem("theme");
 
+  applyTheme(savedTheme);
 
+  for (var selectedTheme of document.querySelectorAll("#selTheme option")) {
+    selectedTheme.selected = savedTheme === selectedTheme.value;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    document.querySelector("#selTheme").addEventListener("change", function() {
+        localStorage.setItem("theme", this.value);
+        applyTheme(this.value)
+    })
+})

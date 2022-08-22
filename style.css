@@ -1,3 +1,68 @@
+:root {
+    --dark-background-color: #111111;
+    --dark-text-color: #eeeeee;
+    --dark-card-color: rgb(4, 4, 97);
+    --dark-header-color: #9c9a9a;
+    
+}
+
+/* Light Mode */
+header {
+    --background-color: #ffffff;
+    --background-color: #ffffff;
+    --trim-color: #dddddd;
+    --text-color: #333333;
+
+}
+body {
+    --background-color: #ffffff;
+    --trim-color: #dddddd;
+    --text-color: #333333;
+
+    margin: 60px 0 0 0;
+    color: var(--text-color);
+    font-family: Monaco, monospace; 
+    background: var(--background-color);
+}
+
+
+/* Dark Mode */
+head.theme-dark {
+    --background-color: var(--dark-background-color);
+    --trim-color: var(--dark-trim-color);
+    --text-color: var(--dark-text-color);
+}
+
+body.theme-dark {
+    --background-color: var(--dark-background-color);
+    --trim-color: var(--dark-trim-color);
+    --text-color: var(--dark-text-color);
+}
+
+body.theme-dark .card, body.theme-dark .box {
+    background-color: var(--dark-card-color);
+}
+
+body.theme-dark h1 , body.theme-dark h2 {
+    color: var(--dark-text-color);
+}
+body.theme-dark .movie-title1, body.theme-dark .movie-year1, body.theme-dark .movie-title2, body.theme-dark .movie-year2,
+body.theme-dark .movie-title3, body.theme-dark .movie-year3,body.theme-dark .movie-title4, body.theme-dark .movie-year4,
+body.theme-dark .movie-title5, body.theme-dark .movie-year5 {
+    color: var(--dark-text-color);
+}
+body.theme-dark ul {
+    color: var(--dark-text-color);
+}
+
+
+.select {
+    display: inline-flex;
+    align-items: left;
+    padding: 0px;
+    border-radius: 25px;
+}
+
 .card{
     background-color: hsl(217, 71%, 53%);
 }
@@ -6,12 +71,12 @@
     background-color: hsl(204, 86%, 53%);
 }
 
-.box:hover {
+.box.result:hover {
     transition: transform 150ms;
     transform: scale(1.05);
 }
 
-.box:active {
+.box.result:active {
     background-color: lightgreen;
     transition: transform 150ms;
     transform: scale(1)
@@ -21,3 +86,18 @@
     font-weight: bold;
     font-size: large;
 }
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+span {
+    color: rgb(4, 77, 126);
+}
+
+
+
+
+
