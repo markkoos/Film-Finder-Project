@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedTheme.selected = savedTheme === selectedTheme.value;
   }
 
+
     document.querySelector("#selTheme").addEventListener("change", function() {
         localStorage.setItem("theme", this.value);
         applyTheme(this.value)
