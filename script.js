@@ -163,7 +163,7 @@ getDailyAPI();
 // http://www.omdbapi.com/?t=star+wars&plot=full&apikey=8e725623
 function grabData() {
     // var movieURL = "https://www.omdbapi.com/?t=" + selectedMovie + "&apikey=8e725623"
-    var movieURL = `http://www.omdbapi.com/?t=${selectedMovie}&plot=full&apikey=8e725623`
+    var movieURL = `https://www.omdbapi.com/?t=${selectedMovie}&plot=full&apikey=8e725623`
 
     fetch(movieURL)
         .then(function (response) {
