@@ -235,49 +235,24 @@ searchEl.addEventListener("click", function (event) {
 
 
 
+function applyTheme(theme){
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(`theme-${theme}`);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    var savedTheme = localStorage.getItem("theme");
+
+  applyTheme(savedTheme);
+
+  for (var selectedTheme of document.querySelectorAll("#selTheme option")) {
+    selectedTheme.selected = savedTheme === selectedTheme.value;
+  }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    document.querySelector("#selTheme").addEventListener("change", function() {
+        localStorage.setItem("theme", this.value);
+        applyTheme(this.value)
+    })
+})

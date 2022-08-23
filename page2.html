@@ -10,10 +10,19 @@
 </head>
 
 <body class="section px-3">
-    <h1 class="container is-max-desk has-text-centered is-size-1"><strong>Film Finders</strong></h1>
+    <h1 class="container is-max-desk has-text-centered is-size-1"><span>Film Finders</span></h1>
     <H2 class="container is-max-desk has-text-centered is-size-1">Finding Films and Researching made Easy</H2>
     <button class="button is-success is-small" id="back-button" href="/index.html">Back To Search Page</button>   
    
+    <div>
+      <h2 class="title is-3">Theme:</h2></div>
+        <div class="select">
+          <select class = "select_input" id = "selTheme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+                    
+    </div>
    
 
 <div class="tile is-ancestor">
@@ -36,4 +45,26 @@
   </div>
 </body>
 <script src="./script.js"></script>
+<script>
+  function applyTheme(theme){
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(`theme-${theme}`);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    var savedTheme = localStorage.getItem("theme");
+
+  applyTheme(savedTheme);
+
+  for (var selectedTheme of document.querySelectorAll("#selTheme option")) {
+    selectedTheme.selected = savedTheme === selectedTheme.value;
+  }
+
+    document.querySelector("#selTheme").addEventListener("change", function() {
+        localStorage.setItem("theme", this.value);
+        applyTheme(this.value)
+    })
+})
+</script>
 </html>
