@@ -97,3 +97,7 @@ body.theme-dark ul {
 span {
     color: rgb(4, 77, 126);
 }
+
+.select {
+    margin-bottom: 30px;
+}
